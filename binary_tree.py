@@ -9,7 +9,7 @@ class Node:
     def __repr__(self):
         return f"Node data: {self.data}"
 
-class binary_tree:
+class BinaryTree:
     
     def __init__(self,root):
         self.root = root
@@ -42,6 +42,6 @@ b.left = d
 b.right = e
 c.left = f
 
-tree = binary_tree(a)
+tree = BinaryTree(a)
 tree.depth_search()
 
