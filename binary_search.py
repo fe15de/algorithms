@@ -8,7 +8,7 @@ def random_list():
         
     return lis
 
-def bianary_search(numbers, target):
+def binary_search(numbers, target):
     first = numbers[0]
     last = len(numbers) - 1
     while first <= last:
@@ -31,6 +31,6 @@ def verify(index):
 
 numbers = random_list() # not ordered list
 numbers = quicksort(numbers)
-result = bianary_search(numbers,32)
+result = binary_search(numbers,32)
 verify(result)
 print(numbers)
