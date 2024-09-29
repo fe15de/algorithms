@@ -3,7 +3,7 @@ from quicksort import quicksort
 
 def random_list():
     lis = []
-    for i in range(100):
+    for i in range(10):
         lis.append(random.randint(0,40))
         
     return lis
