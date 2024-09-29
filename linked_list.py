@@ -8,7 +8,7 @@ class Node:
         self.data = data
     
     def __repr__(self):
-        return "<Node data: %s>" %self.data
+        return f"<Node data: {self.data}>" 
 
 
 class LinkedList:
