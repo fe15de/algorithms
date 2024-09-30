@@ -1,6 +1,24 @@
 from binary_search import random_list
 import numpy as np
 
+#                       This quicksort uses more memory 
+# def quicksort(numbers):
+#     length = len(numbers)
+#
+#     if length <= 1:
+#         return numbers 
+#
+#     pivot = numbers.pop()
+#     greater = []
+#     lower = []
+#
+#     for i in numbers:
+#         if i > pivot:
+#             greater.append(i)
+#         else:
+#             lower.append(i)
+#
+#     return quicksort(lower) + [pivot] + quicksort(greater)
 
 
 
@@ -20,8 +38,6 @@ def quicksort(vector):
 
 
 
-
-
 def locate_pivot(vector, start, end):
     while start < end:
         while vector[end] >= vector[start] and start < end:
@@ -34,7 +50,6 @@ def locate_pivot(vector, start, end):
 
         vector[start], vector[end] = vector[end], vector[start]
     return start
-
 
 
 test_vec = random_list() # not ordered list
