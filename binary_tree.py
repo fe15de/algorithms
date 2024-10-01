@@ -16,12 +16,6 @@ class BinaryTree:
     def __init__(self,root):
         self.root = root
 
-
-'''
-        TODO 
-Implement a method to add nodes to the tree 
-'''
-
     def depth_search(self):
         
         if self.root == None:
@@ -38,7 +32,7 @@ Implement a method to add nodes to the tree
     
     def breath_search(self):
     # It's like a search in levels 
-    # it finishes searching a level of the tree before going down more  
+    # it finishes searching a level of the tree before going below 
         if self.root == None:
             return
 
