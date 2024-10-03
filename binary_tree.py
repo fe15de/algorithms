@@ -16,7 +16,7 @@ class BinaryTree:
     def __init__(self,root):
         self.root = root
 
-    def depth_search(self):
+    def depth_first_search(self):
         
         if self.root == None:
             return
@@ -30,7 +30,7 @@ class BinaryTree:
                 stack.append(current.left)
             print(current)
     
-    def breath_search(self):
+    def breath_first_search(self):
     # It's like a search in levels 
     # it finishes searching a level of the tree before going below 
         if self.root == None:
@@ -63,7 +63,6 @@ b.right = e
 c.left = f
 
 tree = BinaryTree(a)
-tree.depth_search()
+tree.depth_first_search()
 print('----------------------')
-tree.breath_search()
-
+tree.breath_first_search()
