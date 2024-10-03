@@ -16,8 +16,11 @@ class BinaryTree:
     def __init__(self,root):
         self.root = root
 
+    def add(self,data):
+        pass
+
     def depth_first_search(self):
-        
+    #DFS
         if self.root == None:
             return
         
@@ -31,6 +34,7 @@ class BinaryTree:
             print(current)
     
     def breath_first_search(self):
+    #BFS
     # It's like a search in levels 
     # it finishes searching a level of the tree before going below 
         if self.root == None:
@@ -48,13 +52,57 @@ class BinaryTree:
                 queue.append(current.right)
             print(current)
 
+    def search(self,key):
+    # Aka tree includes 
+    # search for a value with BFS
+    # It can also be done with DFS 
+        if self.root == None:
+            return
+        
+        queue = deque()
+        queue.append(self.root)
 
-a = Node('a')
-b = Node('b')
-c = Node('c')
-d = Node('d')
-e = Node('e')
-f = Node('f')
+        while queue:
+            current = queue.popleft()
+            if current.data == key:
+                return 'Value found'
+
+            if current.left != None: 
+                queue.append(current.left)
+            if current.right != None:
+                queue.append(current.right)
+            
+        return 'Value not found'
+    
+    def search_recursive(self,root,key):
+        if root == None:
+            return False 
+        if root.data == key:
+            return True
+    
+        return self.search_recursive(root.left, key) or self.search_recursive(root.right, key) 
+
+    def max_path_sum(self,root):
+        
+        if root == None:
+            return 0
+
+        if root.left == None and root.right == None:
+            return root.data
+        
+        max_value = max(self.max_path_sum(root.left) , self.max_path_sum(root.right))
+
+        return root.data + max_value
+        
+#TODO -> add min value method and tree sum
+
+
+a = Node(1)
+b = Node(4)
+c = Node(11)
+d = Node(8)
+e = Node(2)
+f = Node(3)
 
 a.left = b
 a.right = c
@@ -66,3 +114,6 @@ tree = BinaryTree(a)
 tree.depth_first_search()
 print('----------------------')
 tree.breath_first_search()
+print(tree.search(3))
+print(tree.search_recursive(a,3))
+print(tree.max_path_sum(a))
