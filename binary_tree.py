@@ -93,16 +93,52 @@ class BinaryTree:
         max_value = max(self.max_path_sum(root.left) , self.max_path_sum(root.right))
 
         return root.data + max_value
-        
-#TODO -> add min value method and tree sum
 
+    def min_value(self):
+        
+        if self.root == None:
+            return
+
+        lowest = self.root.data
+        stack = [self.root]
+        while stack:
+            current = stack.pop()
+            if current.data < lowest:
+                lowest = current.data
+
+            if current.right != None: 
+                stack.append(current.right)
+            if current.left != None:
+                stack.append(current.left)
+
+        return lowest
+
+    def tree_sum(self):
+        total = 0
+
+        if self.root == None:
+            return
+        
+        queue = deque()
+        queue.append(self.root)
+
+        while queue:
+            current = queue.popleft()
+            total += current.data
+            if current.left != None: 
+                queue.append(current.left)
+            if current.right != None:
+                queue.append(current.right)
+
+        return total
+#TODO -> implement add method
 
 a = Node(1)
 b = Node(4)
 c = Node(11)
 d = Node(8)
 e = Node(2)
-f = Node(3)
+f = Node(60)
 
 a.left = b
 a.right = c
@@ -110,10 +146,15 @@ b.left = d
 b.right = e
 c.left = f
 
-tree = BinaryTree(a)
-tree.depth_first_search()
-print('----------------------')
-tree.breath_first_search()
-print(tree.search(3))
-print(tree.search_recursive(a,3))
-print(tree.max_path_sum(a))
+# def main():
+#     tree = BinaryTree(a)
+#     tree.depth_first_search()
+#     print('----------------------')
+#     tree.breath_first_search()
+#     print(tree.search(3))
+#     print(tree.search_recursive(a,3))
+#     print(tree.max_path_sum(a))
+#     print(tree.min_value())
+#     print(tree.tree_sum())
+#
+# main()
