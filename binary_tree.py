@@ -1,4 +1,5 @@
 from collections import deque
+import random
 
 class Node:
     data = None
@@ -13,11 +14,33 @@ class Node:
 
 class BinaryTree:
     
-    def __init__(self,root):
-        self.root = root
+    def __init__(self):
+        self.root = None 
 
     def add(self,data):
-        pass
+        new_node = Node(data)
+    
+        if self.root is None:
+            self.root = new_node
+            return
+        
+        queue = deque()
+        queue.append(self.root)
+
+        while queue:
+            current = queue.popleft()
+            
+            if current.left is None:
+                current.left = new_node
+                return
+            else:
+                queue.append(current.left)
+            
+            if current.right is None:
+                current.right = new_node
+                return
+            else:
+                queue.append(current.right)
 
     def depth_first_search(self):
     #DFS
@@ -131,30 +154,19 @@ class BinaryTree:
                 queue.append(current.right)
 
         return total
-#TODO -> implement add method
 
-a = Node(1)
-b = Node(4)
-c = Node(11)
-d = Node(8)
-e = Node(2)
-f = Node(60)
+def main():
+    tree = BinaryTree()
 
-a.left = b
-a.right = c
-b.left = d
-b.right = e
-c.left = f
+    for i in range(0,15):
+        tree.add(random.randint(0,40))
+    tree.depth_first_search()
+    print('----------------------')
+    tree.breath_first_search()
+    print(f'search :{tree.search(3)}')
+    print(f'recurisive search : {tree.search_recursive(tree.root,3)}')
+    print(f'max path sum :{tree.max_path_sum(tree.root)}')
+    print(f'min value : {tree.min_value()}')
+    print(f'tree sum : {tree.tree_sum()}')
 
-# def main():
-#     tree = BinaryTree(a)
-#     tree.depth_first_search()
-#     print('----------------------')
-#     tree.breath_first_search()
-#     print(tree.search(3))
-#     print(tree.search_recursive(a,3))
-#     print(tree.max_path_sum(a))
-#     print(tree.min_value())
-#     print(tree.tree_sum())
-#
-# main()
+main()
