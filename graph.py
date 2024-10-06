@@ -1,3 +1,4 @@
+from collections import deque
 #implementation with dictionary
 # g = {'A': ['B', 'C'],
 #      'B': ['C', 'D'],
@@ -20,6 +21,43 @@ class Graph:
         else:
             self.graph[key] = [arguments]
 
+    def dfs(self):
+
+        if self.graph == {}:
+            return
+
+        stack = [next(iter(self.graph))]
+        visited = set()
+        while stack:
+            current = stack.pop()
+            if current not in visited:
+                print(current)
+                visited.add(current)
+                if current in self.graph:
+                    connections = self.graph[current]
+                    for i in range(len(connections),0, -1):
+                        if connections[i-1][0] not in visited:
+                            stack.append(connections[i-1][0])
+
+    def bfs(self):
+
+        if self.graph == {}:
+            return
+
+        queue = deque()
+        queue.append(next(iter(self.graph)))
+        visited = set()
+        while queue:
+            current = queue.popleft()
+            if current not in visited:
+                print(current)
+                visited.add(current)
+                if current in self.graph:
+                    connections = self.graph[current]
+                    for i in connections:
+                        if  i[0] not in visited:
+                            queue.append(i[0])
+
     def __repr__(self):
         elements = ""
         for element in self.graph:
@@ -27,13 +65,17 @@ class Graph:
         return elements
 
 g = Graph()
-
-g.add('A','C',8)
-g.add('A','B',1.5)
-g.add('D','C',2.7)
-g.add('B','C',3.5)
+g.add("A", "B", 1.5)
+g.add("A", "C", 1)
+g.add("A", "D", 2.7)
+g.add("C", "D", 3.5)
+g.add("D", "E", 1.1)
+g.add("D", "F", 1.5)
 print(g)
-
+#The searches doesnt find disconnected nodes 
+g.dfs()
+print('----------------------------')
+g.bfs()
 # implementation with classes 
 # class Edge:
 #     previous = None
