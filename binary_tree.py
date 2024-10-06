@@ -18,6 +18,7 @@ class BinaryTree:
         self.root = None 
 
     def add(self,data):
+        # Uses BFS
         new_node = Node(data)
     
         if self.root is None:
@@ -164,7 +165,7 @@ def main():
     print('----------------------')
     tree.breath_first_search()
     print(f'search :{tree.search(3)}')
-    print(f'recurisive search : {tree.search_recursive(tree.root,3)}')
+    print(f'recursive search : {tree.search_recursive(tree.root,3)}')
     print(f'max path sum :{tree.max_path_sum(tree.root)}')
     print(f'min value : {tree.min_value()}')
     print(f'tree sum : {tree.tree_sum()}')
