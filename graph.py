@@ -1,12 +1,6 @@
 from collections import deque
-#implementation with dictionary
-# g = {'A': ['B', 'C'],
-#      'B': ['C', 'D'],
-#      'C': ['D'],
-#      'D': ['C'],
-#      'E': ['F'],
-#      'F': ['C']}
 
+#implementation with dictionary
 class Graph:
    
     def __init__(self):
@@ -20,14 +14,19 @@ class Graph:
             values.append(arguments)
         else:
             self.graph[key] = [arguments]
-
+    
     def dfs(self):
-
         if self.graph == {}:
             return
-
-        stack = [next(iter(self.graph))]
+            
         visited = set()
+        for node in self.graph:
+            if node not in visited:
+                self.dfs_helper(node, visited)
+
+    def dfs_helper(self,node,visited):
+
+        stack = [node]
         while stack:
             current = stack.pop()
             if current not in visited:
@@ -35,18 +34,24 @@ class Graph:
                 visited.add(current)
                 if current in self.graph:
                     connections = self.graph[current]
-                    for i in range(len(connections),0, -1):
-                        if connections[i-1][0] not in visited:
-                            stack.append(connections[i-1][0])
+                    for i in reversed(connections):
+                        if i[0] not in visited:
+                            stack.append(i[0])
 
     def bfs(self):
 
         if self.graph == {}:
             return
 
-        queue = deque()
-        queue.append(next(iter(self.graph)))
         visited = set()
+        for node in self.graph:
+            if node not in visited:
+                self.bfs_helper(node, visited)
+    
+    def bfs_helper(self,node,visited):
+
+        queue = deque()
+        queue.append(node)
         while queue:
             current = queue.popleft()
             if current not in visited:
@@ -71,8 +76,10 @@ g.add("A", "D", 2.7)
 g.add("C", "D", 3.5)
 g.add("D", "E", 1.1)
 g.add("D", "F", 1.5)
+g.add("G", "F", 1.5)
+# g.add("C", "G", 1.5)
 print(g)
-#The searches doesnt find disconnected nodes 
+#TODO -> Add a better way to see bfs and dfs 
 g.dfs()
 print('----------------------------')
 g.bfs()
