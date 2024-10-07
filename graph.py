@@ -69,6 +69,24 @@ class Graph:
             elements += f'{element} -> {self.graph[element]}\n'
         return elements
 
+
+    def has_path(self,source,destination):
+        if source not in self.graph: 
+            return False
+
+        stack = [source]
+        while stack:
+            current = stack.pop()
+            if current in self.graph:
+                connections = self.graph[current]
+                for node in connections:
+                    if node[0] == destination:
+                        return True
+                    else:
+                        stack.append(node[0])
+
+        return False 
+
 g = Graph()
 g.add("A", "B", 1.5)
 g.add("A", "C", 1)
@@ -83,6 +101,7 @@ print(g)
 g.dfs()
 print('----------------------------')
 g.bfs()
+print(g.has_path('A','G'))
 # implementation with classes 
 # class Edge:
 #     previous = None
