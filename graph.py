@@ -63,22 +63,16 @@ class Graph:
                         if  i[0] not in visited:
                             queue.append(i[0])
 
-    def __repr__(self):
-        elements = ""
-        for element in self.graph:
-            elements += f'{element} -> {self.graph[element]}\n'
-        return elements
-
-
     def has_path(self,source,destination):
         if source not in self.graph: 
             return False
-
+        visited = set()
         stack = [source]
         while stack:
             current = stack.pop()
-            if current in self.graph:
+            if current in self.graph and current not in visited :
                 connections = self.graph[current]
+                visited.add(current)
                 for node in connections:
                     if node[0] == destination:
                         return True
@@ -87,21 +81,68 @@ class Graph:
 
         return False 
 
+    #for undirected graph
+    def connected_components(self):
+        visited = set()
+        count = 0
+
+        for node in self.graph:
+            if self.explore(node , visited):
+                count += 1 
+
+        return count
+
+    def explore(self,node,visited):
+        if node in visited:
+            return False
+    
+        visited.add(node)
+        for neighbor in self.graph[node]:
+            self.explore(neighbor[0],visited)
+
+        return True
+
+    def __repr__(self):
+        elements = ""
+        for element in self.graph:
+            elements += f'{element} -> {self.graph[element]}\n'
+        return elements
+#TODO -> Add a method that returns the count of largest component
 g = Graph()
+#Directed graph
 g.add("A", "B", 1.5)
 g.add("A", "C", 1)
 g.add("A", "D", 2.7)
 g.add("C", "D", 3.5)
 g.add("D", "E", 1.1)
-g.add("D", "F", 1.5)
-g.add("G", "F", 1.5)
-# g.add("C", "G", 1.5)
+g.add("D", "F", 5.5)
+g.add("G", "F", 2.5)
+g.add("C", "G", 1.5)
+#Undirected graph
+# g.add(0,8,0)
+# g.add(0,1,0)
+# g.add(0,5,0)
+# g.add(1,0,0)
+# g.add(5,8,0)
+# g.add(5,0,0)
+# g.add(8,0,0)
+# g.add(8,5,0)
+# g.add(2,3,0)
+# g.add(2,4,0)
+# g.add(3,2,0)
+# g.add(3,4,0)
+# g.add(4,3,0)
+# g.add(4,2,0)
 print(g)
 #TODO -> Add a better way to see bfs and dfs 
 g.dfs()
 print('----------------------------')
 g.bfs()
-print(g.has_path('A','G'))
+print(g.has_path('A','F'))
+# print(g.connected_components())
+
+
+
 # implementation with classes 
 # class Edge:
 #     previous = None
