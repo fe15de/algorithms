@@ -9,7 +9,7 @@ def random_list():
     return lis
 
 def binary_search(numbers, target):
-    first = numbers[0]
+    first = 0
     last = len(numbers) - 1
     while first <= last:
         mid = (first + last) //2
